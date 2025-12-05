@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eight Flipping Cards</title>
+    <style>
+        body {
+            font-family: sans-serif; /* A more common and readable font */
+            margin: 0;
+            background-color: #f8f8f8; /* Light background for contrast */
+        }
+
+        /* Layout for 8 cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive columns */
+            gap: 20px; /* Space between cards */
+            padding: 30px;
+            max-width: 1300px; /* Max width for a nice grid on desktop */
+            margin: 0 auto;
+        }
+
+        /* 1. Set up the 3D space and overall size */
+        .flip-card {
+            background-color: transparent;
+            width: 100%; /* Take up the grid cell width */
+            height: 250px; /* Adjusted height for better image display */
+            perspective: 1000px; 
+            border: 1px solid #026a02;
+            border-radius: 10px;
+            cursor: pointer; /* Indicate it's clickable */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* Important: Ensures nothing spills outside the rounded corners */
+        }
+
+        /* 2. The container for the front and back, handles the flip */
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        /* 3. FLIP LOGIC: Activated by JavaScript adding the 'flipped' class */
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        /* 4. Front and back styles */
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0; /* REMOVED PADDING HERE to allow image to fill */
+            box-sizing: border-box;
+            overflow: hidden; 
+        }
+
+        /* 5. Specific styles for front and back colors */
+        .flip-card-front {
+            background-color: #f1f1f1; /* This background color will only show if image doesn't cover */
+            color: black;
+        }
+
+        .flip-card-back {
+            background-color: #092f0d;
+            color: white;
+            transform: rotateY(180deg);
+            padding: 20px; /* Kept padding for back text */
+            text-align: left;
+        }
+
+        /* Image and GIF Styling */
+        .front-image {
+            width: 100%; /* Make image take full width of container */
+            height: 100%; /* Make image take full height of container */
+            object-fit: cover; /* IMPORTANT: This makes the image cover the entire area */
+            margin: 0; /* REMOVED MARGINS */
+            border-radius: 10px; /* Apply border-radius to the image as well */
+        }
+
+        .flip-card-front h3 {
+            position: absolute; /* Position title over the image */
+            bottom: 10px; /* Adjust as needed */
+            color: white; /* Make text visible over image */
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+            padding: 5px 10px;
+            border-radius: 5px;
+            z-index: 1; /* Ensure text is above image */
+            margin: 0; /* Remove default margin */
+            font-size: 1.2em; /* Adjust font size */
+        }
+
+        .flip-card-back p {
+            font-size: 0.8em;
+            overflow: auto; 
+            max-height: 100%; /* Allow scrolling within the available space */
+            margin-top: 0; /* Adjust as needed */
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-grid">
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="a5.gif" alt="Art" class="front-image">
+                    <h3>Arts</h3>
+                </div>
+                <div class="flip-card-back">
+                    <h2>Art</h2>
+                    <p style="text-align: justify;">Anything could be an art if you put your mind into it.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="a6.gif" alt="Video Games" class="front-image">
+                    <h3>Video Games</h3>
+                </div>
+                <div class="flip-card-back">
+                    <h2>Video Games</h2>
+                    <p style="text-align: justify;">I'm glad I was exposed to games when I was little. Games are awesome, epecially when they're story-based. I guess this is why I want to pursue things that line up with technology.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="a7.gif" alt="Reading" class="front-image">
+                    <h3>Reading</h3>
+                </div>
+                <div class="flip-card-back">
+                    <h2>Reading</h2>
+                    <p style="text-align: justify;">I wasn't a huge fan of reading back then — I actually despised it. But now that I'm older, I've realized that I should, even if it's literature or just reading stuff. It's important, and you get to learn new words that you would never assume exist. So, read people, read!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="a11.gif" alt="Music" class="front-image">
+                    <h3>Music</h3>
+                </div>
+                <div class="flip-card-back">
+                    <h2>Music</h2>
+                    <p style="text-align: justify;">The world would be dull if there wasn't any kind of music.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="a13.gif" alt="Photography" class="front-image">
+                    <h3>Photography</h3>
+                </div>
+                <div class="flip-card-back">
+                    <h2>Photography</h2>
+                    <p style="text-align: justify;">Capturing the environment, people, structures, or literally anything is great. You get to look back and capture one-in-a-million moments.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="a17.gif" alt="Animation" class="front-image">
+                    <h3>Animation</h3>
+                </div>
+                <div class="flip-card-back">
+                    <h2>Animation</h2>
+                    <p style="text-align: justify;">Either digital or traditional, it's awesome.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="a15.gif" alt="Cooking" class="front-image">
+                    <h3>Cooking</h3>
+                </div>
+                <div class="flip-card-back">
+                    <h2>Cooking</h2>
+                    <p style="text-align: justify;">I like cooking for myself! Either baking or just making dishes. However, I'm always conscious about other people tasting them.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="a19.gif" alt="Film" class="front-image">
+                    <h3>Astronomy</h3>
+                </div>
+                <div class="flip-card-back">
+                    <h2>Astronomy</h2>
+                    <p style="text-align: justify;">Since I was a kid, I have always been fascinated by astronomy. I like how peaceful yet mysterious it is — it has this scary but not-so-scary vibes. It's so huge that it seems like an endless void, full of asteroids, planets, galaxies, stars, and more. I love how it still makes me wonder, curious, and have questions about it.</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <script>
+        const flipCards = document.querySelectorAll('.flip-card');
+        flipCards.forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('flipped');
+            });
+        });
+    </script>
+
+</body>
+</html>

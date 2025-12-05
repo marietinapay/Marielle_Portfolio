@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-Pic Slideshow</title>
+    
+    <style>
+        /* Basic reset/sizing */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .slideshow-container {
+            max-width: 800px;
+            position: relative;
+            margin: auto;
+        }
+        .mySlides {
+            display: none;
+            width: 60%;
+        }
+        .mySlides img {
+            width: 100%;
+            display: block;
+            float: left;
+        }
+        .show {
+            opacity: 1;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="slideshow-container">
+
+        <div class="mySlides fade show">
+            <img src="mock2.png" alt="Image One">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="mock3.png" alt="Image Two">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="mock4.png" alt="Image Three">
+        </div>
+
+    </div>
+
+    <div class="main-content">
+    <div class="mockup-container">
+        <img src="assets/mockup.png" alt="">
+    </div>
+
+    <div class="slideshow-right-container"> <div class="slideshow-container">
+            <div class="mySlides show">
+                <img src="mock2.png" alt="Image One">
+            </div>
+            <div class="mySlides">
+                <img src="mock3.png" alt="Image Two">
+            </div>
+            <div class="mySlides">
+                <img src="mock4.png" alt="Image Three">
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            
+            // 1. Hide all slides and remove the 'show' class
+            for (i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('show');
+                slides[i].style.display = "none";
+            }
+            
+            // 2. Increment index, and reset to 0 if we've passed the last slide
+            slideIndex++;
+            if (slideIndex >= slides.length) {
+                slideIndex = 0;
+            }
+            
+            // 3. Display the current slide and add the 'show' class for the fade effect
+            slides[slideIndex].style.display = "block";
+            // Wait a moment then apply the fade class (optional, but ensures display:block takes effect)
+            setTimeout(() => {
+                slides[slideIndex].classList.add('show');
+            }, 50); 
+            
+            // 4. Call itself again after a delay (3000ms = 3 seconds)
+            setTimeout(showSlides, 1000); 
+        }
+    </script>
+</body>
+</html>
